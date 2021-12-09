@@ -1,6 +1,7 @@
+var path = require('path')
+
 module.exports = {
   "stories": [
-    "../src/components/**/*.stories.mdx",
     "../src/**/*.stories.@(js|jsx|ts|tsx)"
   ],
   "addons": [
@@ -8,5 +9,10 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/preset-create-react-app"
   ],
-  "framework": "@storybook/react"
+  "framework": "@storybook/react",
+  // https://github.com/storybookjs/storybook/issues/11989#issuecomment-841801366
+  "webpackFinal": async (config) => {
+    config.resolve.alias['@'] = path.resolve(__dirname, '../src')
+    return config
+  }
 }

@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Notes
+* [StackOverflow: package.json jest config](https://stackoverflow.com/questions/42629925/testing-with-jest-and-webpack-aliases)
+
+
+# Getting Started with Create React App (Default text)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
