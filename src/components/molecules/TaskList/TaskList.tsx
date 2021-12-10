@@ -1,11 +1,18 @@
 import React from 'react'
-import Task from '@/components/atoms/Task/Task'
+import Task, { TaskAction, TaskType } from '@/components/atoms/Task/Task'
 import PropTypes from 'prop-types'
 
-export default function TaskList({ loading, tasks, onPinTask, onArchiveTask }) {
+export type TaskListProps = {
+    tasks: TaskType[];
+    loading?: boolean;
+    onPinTask?: TaskAction;
+    onArchiveTask?: TaskAction;
+}
+
+export default function TaskList(props: TaskListProps) {
     const events = {
-        onPinTask,
-        onArchiveTask,
+        onPintask: props.onPinTask,
+        onArchiveTask: props.onArchiveTask,
     };
 
     const LoadingRow = (
@@ -17,7 +24,7 @@ export default function TaskList({ loading, tasks, onPinTask, onArchiveTask }) {
         </div>
     )
 
-    if (loading) {
+    if (props.loading) {
         return (
             <div className="list-items">
                 {[...Array(5)].map(_ => LoadingRow)}
@@ -25,7 +32,7 @@ export default function TaskList({ loading, tasks, onPinTask, onArchiveTask }) {
         )
     }
 
-    if (tasks.length === 0) {
+    if (props.tasks.length === 0) {
         return (
             <div className="list-items">
                 <div className="wrapper-message">
@@ -38,8 +45,8 @@ export default function TaskList({ loading, tasks, onPinTask, onArchiveTask }) {
     }
 
     const tasksInOrder = [
-        ...tasks.filter(t => t.state == 'TASK_PINNED'),
-        ...tasks.filter(t => t.state !== 'TASK_PINNED'),
+        ...props.tasks.filter(t => t.state == 'TASK_PINNED'),
+        ...props.tasks.filter(t => t.state !== 'TASK_PINNED'),
     ]
     return (
         <div className="list-items">
